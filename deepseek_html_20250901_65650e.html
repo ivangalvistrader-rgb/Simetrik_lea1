@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prometeo - Copiloto Educativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #22d3ee;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+        }
+        
+        .value-proposition {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .propuesta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .propuesta-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .propuesta-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .how-it-works {
+            background-color: #f1f5f9;
+        }
+        
+        .funcionalidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .funcionalidad {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .funcionalidad:hover {
+            transform: translateY(-5px);
+        }
+        
+        .funcionalidad-header {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .funcionalidad-body {
+            padding: 20px;
+        }
+        
+        .funcionalidad-body ul {
+            list-style-type: none;
+            margin: 15px 0;
+        }
+        
+        .funcionalidad-body li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .funcionalidad-body li i {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .benefits {
+            text-align: center;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .propuesta {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .propuesta-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>Prometeo</h1>
+            <p class="subtitle">Tu copiloto educativo inteligente que resuelve dudas de forma inmediata y contextual, integrando LLM avanzado con Simetrik Academic 2.0 para una experiencia de aprendizaje única.</p>
+        </div>
+    </header>
+
+    <section class="value-proposition">
+        <div class="container">
+            <h2>Propuesta de Valor</h2>
+            
+            <div class="propuesta">
+                <div class="propuesta-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="propuesta-content">
+                    <h3>LLM Avanzado con Conocimiento Integral</h3>
+                    <p>Modelo de lenguaje entrenado con el Help Center, casos de uso reales y tutoriales, proporcionando respuestas inmediatas y contextuales a las dudas de los usuarios.</p>
+                </div>
+            </div>
+            
+            <div class="propuesta">
+                <div class="propuesta-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="propuesta-content">
+                    <h3>Simetrik Academic 2.0</h3>
+                    <p>Evoluciona el canal de YouTube actual hacia un ecosistema educativo multiformato, escalable y segmentado que se adapta a las necesidades específicas de cada usuario.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>¿Cómo Funciona?</h2>
+            
+            <div class="funcionalidades">
+                <div class="funcionalidad">
+                    <div class="funcionalidad-header">
+                        Prometeo como Primer Punto de Contacto
+                    </div>
+                    <div class="funcionalidad-body">
+                        <p>Chat integrado en la aplicación para resolver dudas rápidas, alimentado con documentación actualizada y casos reales.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Respuestas inmediatas las 24/7</li>
+                            <li><i class="fas fa-check-circle"></i> Contextualizado con casos reales</li>
+                            <li><i class="fas fa-check-circle"></i> Integrado directamente en la aplicación</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="funcionalidad">
+                    <div class="funcionalidad-header">
+                        Rutas Educativas Personalizadas
+                    </div>
+                    <div class="funcionalidad-body">
+                        <p>Simetrik Academic 2.0 ofrece itinerarios de aprendizaje adaptados a cada usuario.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Integrado al producto (Appcues/WalkMe/Pendo)</li>
+                            <li><i class="fas fa-check-circle"></i> Contenido multiformato según preferencias</li>
+                            <li><i class="fas fa-check-circle"></i> Seguimiento del progreso de aprendizaje</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="funcionalidad">
+                    <div class="funcionalidad-header">
+                        Plataforma Multiformato
+                    </div>
+                    <div class="funcionalidad-body">
+                        <p>Diversos formatos de contenido para adaptarse a diferentes estilos de aprendizaje.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Recorridos interactivos y simulaciones</li>
+                            <li><i class="fas fa-check-circle"></i> Artículos técnicos y checklists descargables</li>
+                            <li><i class="fas fa-check-circle"></i> Videos cortos y tutoriales paso a paso</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="container">
+            <h2>Ventajas de Prometeo</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Respuestas Inmediatas</h3>
+                    <p>Reduce el tiempo de espera para resolver dudas de días a segundos.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Mayor Retención</h3>
+                    <p>Contenido educativo personalizado que aumenta la retención de conocimientos.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </div>
+                    <h3>Escalable</h3>
+                    <p>Atiende a múltiples usuarios simultáneamente sin degradar la experiencia.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>Autonomía del Usuario</h3>
+                    <p>Empodera a los usuarios para resolver sus dudas de forma independiente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>Transforma la Experiencia Educativa en tu Organización</h2>
+            <p>Prometeo está listo para revolucionar la forma en que tus usuarios aprenden y resuelven sus dudas.</p>
+            <a href="#" class="cta-button">Solicitar Demostración</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Prometeo - Copiloto Educativo Inteligente</p>
+            <p>Una solución integral para la educación corporativa y el soporte al usuario</p>
+        </div>
+    </footer>
+</body>
+</html>
