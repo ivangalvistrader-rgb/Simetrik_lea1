@@ -1,0 +1,66 @@
+; ============================================================
+; Archivo de configuración de optimización para MT4
+; EA_ForexOptimizer.set
+;
+; CÓMO USAR:
+;  1. En MT4: View > Strategy Tester (Ctrl+R)
+;  2. Expert Advisor: EA_ForexOptimizer
+;  3. Cargar este archivo con "Load" en la pestaña Inputs
+;  4. Marcar "Optimization" y elegir criterio
+;  5. Presionar "Start"
+; ============================================================
+
+; --- Estrategia ---
+InpStrategy=1                ; 1=MA Crossover | 2=RSI+MA | 3=Bollinger | 4=MACD
+
+; --- Medias Móviles (rango de optimización) ---
+InpFastMAPeriod=10           ; Inicio=5, Paso=5, Fin=50
+InpSlowMAPeriod=30           ; Inicio=20, Paso=10, Fin=200
+InpSignalMAPeriod=5          ; Inicio=3, Paso=1, Fin=20
+InpMAMethod=1                ; 0=SMA 1=EMA 2=SMMA 3=LWMA
+
+; --- RSI ---
+InpRSIPeriod=14              ; Inicio=7, Paso=1, Fin=21
+InpRSIOverBought=70.0        ; Inicio=65, Paso=5, Fin=80
+InpRSIOverSold=30.0          ; Inicio=20, Paso=5, Fin=35
+
+; --- Bollinger Bands ---
+InpBBPeriod=20               ; Inicio=10, Paso=5, Fin=50
+InpBBDeviation=2.0           ; Inicio=1.5, Paso=0.5, Fin=3.0
+
+; --- MACD ---
+InpMACDFast=12               ; Inicio=8, Paso=2, Fin=16
+InpMACDSlow=26               ; Inicio=18, Paso=2, Fin=34
+InpMACDSignal=9              ; Inicio=5, Paso=2, Fin=15
+
+; --- ATR / SL / TP ---
+InpATRPeriod=14              ; Inicio=10, Paso=2, Fin=20
+InpATRMultSL=1.5             ; Inicio=1.0, Paso=0.5, Fin=3.0
+InpATRMultTP=2.5             ; Inicio=1.5, Paso=0.5, Fin=4.0
+InpStopLossPips=0            ; 0 = usar ATR dinámico
+InpTakeProfitPips=0          ; 0 = usar ATR dinámico
+
+; --- Trailing Stop ---
+InpUseTrailing=1
+InpTrailingPips=20           ; Inicio=10, Paso=5, Fin=50
+InpTrailingStep=5            ; Inicio=2, Paso=1, Fin=10
+
+; --- Gestión de Riesgo ---
+InpLotMode=1                 ; 0=Lote fijo | 1=% capital
+InpFixedLot=0.01
+InpRiskPercent=1.0           ; Inicio=0.5, Paso=0.5, Fin=3.0
+InpMaxLot=1.0
+
+; --- Filtros ---
+InpUseTrendFilter=1
+InpTrendMAPeriod=200
+InpUseSessions=0
+InpSessionStartHour=8
+InpSessionEndHour=20
+InpMaxSpreadPips=3           ; Inicio=1, Paso=1, Fin=10
+
+; --- Control ---
+InpMagicNumber=12345
+InpMaxPositions=1
+InpAllowBuy=1
+InpAllowSell=1
