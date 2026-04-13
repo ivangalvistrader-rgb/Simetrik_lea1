@@ -1,0 +1,109 @@
+/* === Reset === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  /* Prevent elastic bounce on iOS body */
+  overscroll-behavior: none;
+}
+
+body {
+  height: 100%;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+  overflow: hidden; /* App shell handles scrolling per section */
+}
+
+/* === CRITICAL: Prevent iOS auto-zoom on input focus === */
+input,
+textarea,
+select {
+  font-size: 16px !important;
+  font-family: var(--font-family);
+}
+
+/* === Eliminate 300ms tap delay === */
+a, button, [role="button"], label {
+  touch-action: manipulation;
+}
+
+/* === Typography === */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-lg); }
+
+p { color: var(--color-text-secondary); }
+
+a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+strong { color: var(--color-accent-amber); font-weight: 700; }
+
+code {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg-tertiary);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-green);
+}
+
+/* === Utility Classes === */
+.text-muted     { color: var(--color-text-muted); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-success   { color: var(--color-accent-green); }
+.text-error     { color: var(--color-accent-red); }
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-5);
+}
+
+.label-sm {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.label-xs {
+  font-size: var(--font-size-xs);
+  display: block;
+  margin-top: var(--space-2);
+}
+
+.error-text {
+  color: var(--color-accent-red);
+  font-size: var(--font-size-sm);
+  padding: var(--space-3);
+}
+
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
+.mb-4 { margin-bottom: var(--space-4); }
+
+/* === Scrollbar (webkit) === */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }

@@ -1,0 +1,125 @@
+/* ============================================================
+   VOICE TO NETWORK — Module 3 Styles
+   ============================================================ */
+
+/* === Record Area === */
+.voice-record-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 0 var(--space-4);
+}
+
+/* === Record Button === */
+.voice-record-btn {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-accent-blue), var(--color-accent-purple));
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: 0 4px 24px rgba(74, 124, 247, 0.45);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.voice-record-btn:active {
+  transform: scale(0.93);
+}
+
+.voice-record-btn__icon {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.voice-record-btn__label {
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* === Recording State: pulse animation === */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.voice-record-btn.recording {
+  background: linear-gradient(135deg, var(--color-accent-red), #ff6b35);
+  box-shadow: 0 4px 24px rgba(239, 68, 68, 0.5);
+  animation: none;
+}
+
+.voice-record-btn.recording::before,
+.voice-record-btn.recording::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-accent-red);
+  animation: pulse-ring 1.4s ease-out infinite;
+}
+
+.voice-record-btn.recording::after {
+  animation-delay: 0.7s;
+}
+
+/* === Hint Text === */
+.voice-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* === Message Output === */
+.voice-output:not(:empty) {
+  animation: fadeIn var(--transition-base);
+}
+
+.voice-message-output {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent-purple);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.voice-message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-tertiary);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.voice-word-count {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.voice-message-text {
+  padding: var(--space-5);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+}

@@ -1,0 +1,122 @@
+/* ============================================================
+   JOB RADAR — Module 2 Styles
+   ============================================================ */
+
+/* === Search Card === */
+.radar-card {
+  margin-bottom: var(--space-4);
+}
+
+.radar-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.radar-card__emoji {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.radar-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.radar-card__name {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.radar-card__desc {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.radar-copy-btn {
+  flex-shrink: 0;
+  background: var(--color-bg-tertiary) !important;
+  border: 1px solid var(--color-border) !important;
+  font-size: 16px !important;
+}
+
+/* === Boolean Query Block === */
+.radar-query-block {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent-blue);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+  overflow-x: auto;
+}
+
+.radar-query-block code {
+  background: none;
+  padding: 0;
+  font-size: 12px;
+  color: var(--color-accent-green);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* === Tags === */
+.radar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+}
+
+/* === Platform Grid === */
+.radar-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.radar-platform-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 56px;
+  padding: var(--space-2);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  text-align: center;
+}
+
+.radar-platform-link:active {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-accent-blue);
+}
+
+.radar-platform-link span:first-child {
+  font-size: 18px;
+}
+
+/* === Custom Search Platform Row === */
+.radar-platform-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}

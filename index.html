@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+
+  <!-- PWA / iPhone standalone -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JobRadar">
+  <meta name="theme-color" content="#0d0f14">
+  <meta name="description" content="Búsqueda inteligente de empleo – Riesgo Financiero & IA">
+
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/ats.css">
+  <link rel="stylesheet" href="css/radar.css">
+  <link rel="stylesheet" href="css/voice.css">
+  <link rel="stylesheet" href="css/kanban.css">
+
+  <title>JobRadar – Iván Galvis</title>
+</head>
+<body>
+
+  <!-- ============================================================
+       SETTINGS MODAL (bottom sheet)
+       ============================================================ -->
+  <div id="modal-settings" class="modal" hidden>
+    <div class="modal__card">
+      <h2>⚙️ Configuración</h2>
+
+      <div class="settings-field">
+        <label for="input-api-key">Claude API Key</label>
+        <input type="password" class="input" id="input-api-key"
+               placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false">
+        <p class="settings-hint">
+          Obtén tu key en <strong>console.anthropic.com</strong>.
+          Se guarda solo en tu dispositivo (IndexedDB).
+        </p>
+      </div>
+
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="btn-save-settings" style="flex:1">Guardar</button>
+        <button class="btn btn--ghost"   id="btn-close-settings" style="flex:1">Cerrar</button>
+      </div>
+
+      <div class="divider"></div>
+      <p class="text-muted" style="font-size:12px;text-align:center">
+        JobRadar v1.0 · Iván Galvis · Riesgo & IA LATAM
+      </p>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+  <!-- ============================================================
+       APP HEADER
+       ============================================================ -->
+  <header class="app-header">
+    <div>
+      <span class="app-header__title">JobRadar</span>
+    </div>
+    <button class="icon-btn" id="btn-settings" aria-label="Configuración">⚙️</button>
+  </header>
+
+  <!-- ============================================================
+       TAB CONTENT
+       ============================================================ -->
+  <main class="tab-content" id="tab-content">
+
+    <!-- ==================== MODULE 1: ATS OPTIMIZER ==================== -->
+    <section id="tab-ats" data-tab="ats" class="tab-panel active">
+      <h2 class="section-title">📄 CV Optimizador ATS</h2>
+
+      <!-- Template Selector -->
+      <div class="ats-templates card">
+        <span class="label-sm">Seleccionar plantilla (o la IA detecta automáticamente):</span>
+        <div class="ats-template-grid">
+          <button class="ats-template-btn" data-template="A">
+            <span class="ats-template-btn__icon">🏦</span>
+            <span class="ats-template-btn__name">Riesgo Puro</span>
+            <span class="ats-template-btn__desc">Banca / SFC</span>
+          </button>
+          <button class="ats-template-btn" data-template="B">
+            <span class="ats-template-btn__icon">🤖</span>
+            <span class="ats-template-btn__name">Fintech / IA</span>
+            <span class="ats-template-btn__desc">Startups / Tech</span>
+          </button>
+          <button class="ats-template-btn" data-template="C">
+            <span class="ats-template-btn__icon">🌎</span>
+            <span class="ats-template-btn__name">Híbrido LATAM</span>
+            <span class="ats-template-btn__desc">Multinacionales</span>
+          </button>
+        </div>
+        <div id="ats-template-badge" class="ats-detected-badge" hidden>
+          <span id="ats-badge-text"></span>
+        </div>
+      </div>
+
+      <!-- Job Description Input -->
+      <div class="mt-4">
+        <span class="label-sm">Descripción de la vacante:</span>
+        <textarea class="input" id="ats-job-desc" rows="7"
+          placeholder="Pega aquí el texto completo de la oferta de empleo...&#10;&#10;Ej: 'Buscamos Director de Riesgos con experiencia en SAGRILAFT, gestión de Riesgo de Liquidez...'"></textarea>
+      </div>
+
+      <button class="btn btn--primary btn--full btn--lg mt-4" id="ats-btn-analyze">
+        Analizar Vacante
+      </button>
+
+      <!-- Output Area -->
+      <div id="ats-output" class="ats-output mt-4"></div>
+
+      <!-- Copy Button (shown after generation) -->
+      <button class="btn btn--success btn--full btn--lg mt-4" id="ats-btn-copy" hidden>
+        📋 COPIAR CV OPTIMIZADO
+      </button>
+    </section>
+
+    <!-- ==================== MODULE 2: JOB RADAR ==================== -->
+    <section id="tab-radar" data-tab="radar" class="tab-panel">
+      <h2 class="section-title">🔍 Radar de Vacantes</h2>
+
+      <p class="text-secondary mb-4" style="font-size:14px">
+        Búsquedas booleanas calibradas para tu perfil. Toca un portal para buscar.
+      </p>
+
+      <!-- Preset Searches Container -->
+      <div id="radar-presets"></div>
+
+      <!-- Custom Search -->
+      <div class="card mt-4">
+        <span class="label-sm">🔎 Búsqueda personalizada:</span>
+        <textarea class="input" id="radar-custom-input" rows="3"
+          placeholder='"Risk Manager" AND (Python OR IA) AND Bogotá'></textarea>
+        <div class="radar-platform-row mt-3" id="radar-custom-platforms"></div>
+        <p class="label-xs text-muted">
+          ⚠️ Filtro activo: excluye Call Center / Soporte / Atención al Cliente
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== MODULE 3: VOICE TO NETWORK ==================== -->
+    <section id="tab-voice" data-tab="voice" class="tab-panel">
+      <h2 class="section-title">🎙️ Voz → LinkedIn</h2>
+
+      <p class="text-secondary mb-4" style="font-size:14px">
+        Habla el contexto del reclutador/vacante. La IA escribe el mensaje de LinkedIn.
+      </p>
+
+      <!-- Voice Record Button -->
+      <div class="voice-record-area">
+        <button class="voice-record-btn" id="voice-btn-record" aria-label="Iniciar grabación">
+          <span class="voice-record-btn__icon">🎙️</span>
+          <span class="voice-record-btn__label" id="voice-btn-label">Hablar</span>
+        </button>
+        <p class="voice-hint" id="voice-hint">Toca para grabar · Safari iOS requerido para voz</p>
+      </div>
+
+      <!-- Transcript Area -->
+      <div class="mt-4">
+        <span class="label-sm">Transcripción / Contexto:</span>
+        <textarea class="input" id="voice-transcript" rows="4"
+          placeholder="El texto grabado aparecerá aquí...&#10;&#10;También puedes escribir directamente:&#10;Ej: 'Mensaje para reclutador de Bancolombia, vacante Director Riesgos'"></textarea>
+      </div>
+
+      <button class="btn btn--primary btn--full btn--lg mt-4" id="voice-btn-generate">
+        Generar Mensaje LinkedIn
+      </button>
+
+      <!-- Output -->
+      <div id="voice-output" class="voice-output mt-4"></div>
+
+      <button class="btn btn--success btn--full btn--lg mt-4" id="voice-btn-copy" hidden>
+        📋 COPIAR MENSAJE
+      </button>
+    </section>
+
+    <!-- ==================== MODULE 4: KANBAN ==================== -->
+    <section id="tab-kanban" data-tab="kanban" class="tab-panel">
+      <div class="kanban-header">
+        <h2 class="section-title" style="margin-bottom:0">📋 Postulaciones</h2>
+        <button class="btn btn--primary btn--icon" id="kanban-btn-add" aria-label="Agregar postulación">+</button>
+      </div>
+
+      <!-- Board — horizontally scrollable on mobile -->
+      <div id="kanban-board" class="kanban-board"></div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       BOTTOM TAB BAR
+       ============================================================ -->
+  <nav class="tab-bar" role="navigation" aria-label="Navegación principal">
+    <button class="tab-btn active" data-target="ats" aria-label="CV ATS">
+      <span class="tab-btn__icon">📄</span>
+      <span class="tab-btn__label">CV ATS</span>
+    </button>
+    <button class="tab-btn" data-target="radar" aria-label="Radar de vacantes">
+      <span class="tab-btn__icon">🔍</span>
+      <span class="tab-btn__label">Radar</span>
+    </button>
+    <button class="tab-btn" data-target="voice" aria-label="Voz a LinkedIn">
+      <span class="tab-btn__icon">🎙️</span>
+      <span class="tab-btn__label">Voz</span>
+    </button>
+    <button class="tab-btn" data-target="kanban" aria-label="Tablero Kanban">
+      <span class="tab-btn__icon">📋</span>
+      <span class="tab-btn__label">Kanban</span>
+    </button>
+  </nav>
+
+  <!-- ============================================================
+       SCRIPTS — load order matters
+       ============================================================ -->
+  <script src="js/db.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ats.js"></script>
+  <script src="js/radar.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/kanban.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

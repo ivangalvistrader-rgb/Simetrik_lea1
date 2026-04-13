@@ -1,0 +1,177 @@
+/* === Fixed App Header === */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  /* Add safe area for notch / Dynamic Island */
+  padding-top: env(safe-area-inset-top, 0px);
+  height: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-left: var(--space-5);
+  padding-right: var(--space-4);
+  padding-bottom: var(--space-3);
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.app-header__title {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #4a7cf7, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-header__subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  display: block;
+}
+
+/* === Tab Content Area === */
+.tab-content {
+  position: fixed;
+  top: calc(var(--header-height) + env(safe-area-inset-top, 0px));
+  bottom: calc(var(--tabbar-height) + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* === Tab Panels === */
+.tab-panel {
+  display: none;
+  padding: var(--space-4);
+  padding-bottom: var(--space-6);
+  min-height: 100%;
+  animation: fadeIn var(--transition-base);
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Fixed Bottom Tab Bar === */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--tabbar-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* === Tab Buttons === */
+.tab-btn {
+  min-height: var(--touch-target);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 0;
+}
+
+.tab-btn.active {
+  color: var(--color-accent-blue);
+}
+
+.tab-btn.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: var(--color-accent-blue);
+  border-radius: 0 0 2px 2px;
+}
+
+.tab-btn__icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.tab-btn__label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+/* === Settings Modal === */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: flex-end;
+  z-index: 200;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal__card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: var(--space-6) var(--space-5);
+  padding-bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  animation: slideUp var(--transition-base);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.modal__card h2 {
+  margin-bottom: var(--space-5);
+}
+
+.modal__card label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.modal__actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}

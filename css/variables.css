@@ -1,0 +1,75 @@
+:root {
+  /* === Dark Theme Colors === */
+  --color-bg-primary:    #0d0f14;
+  --color-bg-secondary:  #161b26;
+  --color-bg-tertiary:   #1e2535;
+  --color-bg-elevated:   #252d42;
+
+  --color-border:        #2e3a52;
+  --color-border-focus:  #4a7cf7;
+
+  --color-text-primary:  #e8eaf2;
+  --color-text-secondary:#8892a4;
+  --color-text-muted:    #4f5a70;
+
+  --color-accent-blue:   #4a7cf7;
+  --color-accent-green:  #22c55e;
+  --color-accent-amber:  #f59e0b;
+  --color-accent-red:    #ef4444;
+  --color-accent-purple: #a855f7;
+
+  /* Kanban column colors */
+  --kanban-col-1: #111d35;
+  --kanban-col-2: #0f2820;
+  --kanban-col-3: #231a0e;
+  --kanban-col-4: #18132b;
+
+  /* Template badge colors */
+  --badge-a: #1a2744;
+  --badge-b: #1a2633;
+  --badge-c: #221a33;
+
+  /* === Spacing (8px base grid) === */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+
+  /* === Typography === */
+  --font-size-xs:   12px;
+  --font-size-sm:   14px;
+  --font-size-base: 16px;
+  --font-size-lg:   18px;
+  --font-size-xl:   22px;
+  --font-size-2xl:  28px;
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+                 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', Consolas, monospace;
+
+  /* === Touch targets === */
+  --touch-target: 48px;
+
+  /* === Layout === */
+  --header-height:   56px;
+  --tabbar-height:   64px;
+
+  /* === Radius === */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-card:  0 2px 12px rgba(0,0,0,0.4);
+  --shadow-modal: 0 8px 40px rgba(0,0,0,0.7);
+  --shadow-fab:   0 4px 20px rgba(74,124,247,0.4);
+
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
